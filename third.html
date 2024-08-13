@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style type="text/css">
+		*
+		{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Roboto', sans-serif;
+		}
+		body 
+		{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			background: #202020;
+		}
+		.container
+		{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.container .block 
+		{
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			background: #444;
+			box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
+		}
+		.container.circle .block  
+		{
+			border-radius: 50%;
+		}
+		.container .block:nth-child(3n + 1)
+		{
+			background: #444;
+		}
+		.container .block:nth-child(3n + 2)
+		{
+			background: #fff;
+		}
+		.container .block:nth-child(3n + 3)
+		{
+			background: #03a9f4;
+		}
+		.container button 
+		{
+			position: relative;
+			z-index: 1;
+			margin: 10px;
+			border: none;
+			background: #fff;
+			font-size: 1.2em;
+			cursor: pointer;
+			padding: 15px 30px;
+			box-shadow: 10px 10px 30px rgba(0,0,0,0.25);
+		}
+		
+		.top-buttons {
+		    position: absolute;
+		    top: 20px; /* 调整这个值来改变按钮距离顶部的距离 */
+		    left: 50%;
+		    transform: translateX(-50%);
+		    display: flex;
+		    gap: 20px;
+		}
+		
+		.button {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    width: 100px;
+		    height: 50px;
+		    font-size: 16px;
+		    font-weight: bold;
+		    color: lightcoral;
+		    text-decoration: none;
+		    background-color: rgba(255, 255, 255, 0.1);
+		    backdrop-filter: blur(4px);
+		    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+		    border-radius: 5px;
+		    transition: all 0.3s ease-in-out;
+		    cursor: pointer;
+		}
+		
+		.button:hover {
+		    background-color: rgba(255, 255, 255, 0.2);
+		    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+		}
+		
+	</style>
+
+	<body>
+		<div style="z-index: 999;" class="top-buttons">
+		    <a href="second.html" class="button first-button">back</a>
+		    <a  class="button third-button">next</a>
+		</div>
+		<div class="container">
+			<button onclick="generate();">Generate</button>
+			<button onclick="circle();generate();" class="circleBtn">Circle | Square</button>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+			let container = document.querySelector('.container');
+			for (var i=0; i<=80; i++){
+				let blocks = document.createElement('div');
+				blocks.classList.add('block');
+				container.appendChild(blocks);
+			}
+		
+			function circle(){
+				let circleBtn = document.querySelector('.circleBtn');
+				container.classList.toggle('circle');
+			}
+		
+			function generate(){
+				anime({
+					targets : '.block',
+					translateX : function(){
+						return anime.random(-700,700);
+					},
+					translateY : function(){
+						return anime.random(-500,500);
+					},
+					scale : function(){
+						return anime.random(1,5);
+					}
+				})
+			}
+		
+			generate()
+		</script>
+	</body>
+
+</html>
